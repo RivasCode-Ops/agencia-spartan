@@ -39,18 +39,16 @@ var SPARTAN = {
 
   function buildLeadWhatsAppText(form) {
     var nome = (form.nome && form.nome.value.trim()) || "";
-    var sel = form.servico;
-    var servicoLabel = sel && sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].text : "";
-    var mensagem = (form.mensagem && form.mensagem.value.trim()) || "";
+    var tel = (form.telefone && form.telefone.value.trim()) || "";
+    var sel = form.tipo_negocio;
+    var tipoLabel = sel && sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].text : "";
     var lines = [
       "Olá, sou " + nome + ".",
       "",
-      "Serviço de interesse: " + servicoLabel,
+      "Telefone: " + tel,
+      "Tipo de negócio: " + tipoLabel,
       "",
-      "Mensagem:",
-      mensagem,
-      "",
-      "— Lead pelo site SPARTAN.",
+      "— Solicitação de diagnóstico (site SPARTAN).",
     ];
     var us = form.querySelector('[name="utm_source"]');
     var um = form.querySelector('[name="utm_medium"]');
@@ -97,7 +95,7 @@ var SPARTAN = {
     }
     if (btn) {
       btn.disabled = true;
-      btn.textContent = "Mensagem enviada — veja o WhatsApp";
+      btn.textContent = "Enviado — veja o WhatsApp";
     }
   }
 
