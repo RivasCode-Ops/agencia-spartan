@@ -19,6 +19,13 @@ var SPARTAN = {
     return "https://wa.me/" + n + "?text=" + t;
   }
 
+  function waHrefWithMessage(msg) {
+    var n = digitsOnly(SPARTAN.whatsapp);
+    if (!n) n = "5586999999999";
+    var t = encodeURIComponent(msg || SPARTAN.waMessage || "Olá");
+    return "https://wa.me/" + n + "?text=" + t;
+  }
+
   function captureUtm() {
     var p = new URLSearchParams(window.location.search);
     ["utm_source", "utm_medium", "utm_campaign"].forEach(function (k) {
@@ -92,8 +99,9 @@ var SPARTAN = {
   }
 
   function bindWhatsapp() {
-    var href = waHref();
     document.querySelectorAll(".js-wa").forEach(function (a) {
+      var custom = a.getAttribute("data-wa-message");
+      var href = custom ? waHrefWithMessage(custom) : waHref();
       a.setAttribute("href", href);
     });
   }
