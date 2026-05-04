@@ -30,16 +30,65 @@ var SPARTAN = {
     });
   }
 
-  function bindFormsubmit() {
-    var email = SPARTAN.formSubmitEmail;
-    if (!email || email.indexOf("@") === -1) email = "seu-email@dominio.com";
+  function buildLeadWhatsAppText(form) {
+    var nome = (form.nome && form.nome.value.trim()) || "";
+    var sel = form.servico;
+    var servicoLabel = sel && sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].text : "";
+    var mensagem = (form.mensagem && form.mensagem.value.trim()) || "";
+    var lines = [
+      "Olá, sou " + nome + ".",
+      "",
+      "Serviço de interesse: " + servicoLabel,
+      "",
+      "Mensagem:",
+      mensagem,
+      "",
+      "— Lead pelo site SPARTAN.",
+    ];
+    var us = form.querySelector('[name="utm_source"]');
+    var um = form.querySelector('[name="utm_medium"]');
+    var uc = form.querySelector('[name="utm_campaign"]');
+    var utmParts = [];
+    if (us && us.value.trim()) utmParts.push("utm_source=" + us.value.trim());
+    if (um && um.value.trim()) utmParts.push("utm_medium=" + um.value.trim());
+    if (uc && uc.value.trim()) utmParts.push("utm_campaign=" + uc.value.trim());
+    if (utmParts.length) {
+      lines.push("");
+      lines.push("Origem: " + utmParts.join(" | "));
+    }
+    return lines.join("\n");
+  }
+
+  function trackContact() {
+    if (typeof fbq !== "undefined") fbq("track", "Contact");
+    if (typeof gtag !== "undefined")
+      gtag("event", "whatsapp_click", { event_category: "contato", event_label: "form_lead" });
+  }
+
+  function openWhatsAppWithText(text) {
+    var n = digitsOnly(SPARTAN.whatsapp);
+    if (!n) n = "5586999999999";
+    var url = "https://wa.me/" + n + "?text=" + encodeURIComponent(text);
+    var w = window.open(url, "_blank", "noopener,noreferrer");
+    if (!w || w.closed) {
+      window.location.href = url;
+    }
+  }
+
+  function bindLeadForm() {
     var form = document.getElementById("lead-form");
     if (!form) return;
-    form.setAttribute("action", "https://formsubmit.co/" + encodeURIComponent(email));
-    var next = form.querySelector('input[name="_next"]');
-    if (next) {
-      next.value = new URL("obrigado.html", window.location.href).href;
-    }
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var honey = form.querySelector('[name="_honey"]');
+      if (honey && honey.value) return;
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      trackContact();
+      openWhatsAppWithText(buildLeadWhatsAppText(form));
+    });
   }
 
   function bindWhatsapp() {
@@ -71,7 +120,7 @@ var SPARTAN = {
 
   document.addEventListener("DOMContentLoaded", function () {
     captureUtm();
-    bindFormsubmit();
+    bindLeadForm();
     bindWhatsapp();
   });
 })();

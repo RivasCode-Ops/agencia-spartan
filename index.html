@@ -160,17 +160,38 @@
 
           <div id="form" class="form-container">
             <h3>Solicitar diagnóstico gratuito</h3>
-            <form id="lead-form" method="POST" novalidate>
-              <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_next" value="" />
-              <input type="hidden" name="_subject" value="[SPARTAN] Diagnóstico solicitado pelo site" />
+            <form id="lead-form" novalidate>
               <input type="hidden" name="utm_source" value="" />
               <input type="hidden" name="utm_medium" value="" />
               <input type="hidden" name="utm_campaign" value="" />
               <input type="text" name="_honey" class="sr-only" tabindex="-1" autocomplete="off" />
-              <input type="text" name="nome" placeholder="Seu nome" required autocomplete="name" />
-              <input type="tel" name="telefone" placeholder="WhatsApp com DDD" required autocomplete="tel" />
-              <button type="submit" class="btn-primary">Enviar →</button>
+              <label class="form-label" for="lead-nome">Nome</label>
+              <input
+                id="lead-nome"
+                type="text"
+                name="nome"
+                placeholder="Seu nome"
+                required
+                autocomplete="name"
+              />
+              <label class="form-label" for="lead-servico">Serviço de interesse</label>
+              <select id="lead-servico" name="servico" required>
+                <option value="" disabled selected>Selecione</option>
+                <option value="estrutura">Estrutura digital (site / presença)</option>
+                <option value="conversao">Conversão (landing / funil)</option>
+                <option value="integracao">Integração (WhatsApp, CRM, tracking)</option>
+                <option value="trafego">Base para tráfego pago</option>
+                <option value="outro">Outro / diagnóstico geral</option>
+              </select>
+              <label class="form-label" for="lead-msg">Mensagem</label>
+              <textarea
+                id="lead-msg"
+                name="mensagem"
+                placeholder="Conte brevemente o que você precisa."
+                required
+                rows="4"
+              ></textarea>
+              <button type="submit" class="btn-primary">Abrir WhatsApp com mensagem →</button>
             </form>
           </div>
         </div>
