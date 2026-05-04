@@ -1,3 +1,7 @@
+:root {
+  --topbar-h: 56px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -9,6 +13,101 @@ body {
   line-height: 1.5;
   color: #111;
   background-color: #fff;
+  padding-top: var(--topbar-h);
+}
+
+#produtos,
+#processo,
+#seguranca,
+#diagnostico {
+  scroll-margin-top: calc(var(--topbar-h) + 12px);
+}
+
+.site-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #eaeef2;
+}
+
+.site-topbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  min-height: var(--topbar-h);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.site-topbar__brand {
+  font-weight: 700;
+  color: #0a3d3d;
+  text-decoration: none;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.site-topbar__brand:hover {
+  color: #0e5e5e;
+}
+
+.site-topbar__nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 14px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.site-topbar__nav a {
+  color: #475569;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-topbar__nav a:hover {
+  color: #0a3d3d;
+}
+
+.site-topbar__wa {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --topbar-h: 100px;
+  }
+
+  .site-topbar__inner {
+    row-gap: 8px;
+  }
+
+  .site-topbar__nav {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    gap: 12px;
+    padding-bottom: 2px;
+    margin: 0 -6px;
+    padding-left: 6px;
+    padding-right: 6px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
 }
 
 .container {
