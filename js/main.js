@@ -82,6 +82,25 @@ var SPARTAN = {
     }
   }
 
+  function showLeadThanks(form) {
+    var thanks = document.getElementById("lead-thanks");
+    var heading = document.getElementById("lead-form-heading");
+    var btn = document.getElementById("lead-submit-btn");
+    if (heading) heading.hidden = true;
+    if (form) form.hidden = true;
+    if (thanks) {
+      thanks.classList.add("is-visible");
+      thanks.setAttribute("tabindex", "-1");
+      try {
+        thanks.focus();
+      } catch (err) {}
+    }
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "Mensagem enviada — veja o WhatsApp";
+    }
+  }
+
   function bindLeadForm() {
     var form = document.getElementById("lead-form");
     if (!form) return;
@@ -94,6 +113,7 @@ var SPARTAN = {
         return;
       }
       trackContact();
+      showLeadThanks(form);
       openWhatsAppWithText(buildLeadWhatsAppText(form));
     });
   }

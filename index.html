@@ -292,7 +292,7 @@
           </div>
 
           <div id="form" class="form-container">
-            <h3>Solicitar diagnóstico gratuito</h3>
+            <h3 id="lead-form-heading">Solicitar diagnóstico gratuito</h3>
             <form id="lead-form" novalidate>
               <input type="hidden" name="utm_source" value="" />
               <input type="hidden" name="utm_medium" value="" />
@@ -324,8 +324,20 @@
                 required
                 rows="4"
               ></textarea>
-              <button type="submit" class="btn-primary">Abrir WhatsApp com mensagem →</button>
+              <button type="submit" class="btn-primary" id="lead-submit-btn">Abrir WhatsApp com mensagem →</button>
             </form>
+            <div class="form-obrigado" id="lead-thanks" aria-live="polite">
+              <p class="form-obrigado-titulo">Pedido de diagnóstico enviado</p>
+              <p class="form-obrigado-texto">
+                A mensagem foi preparada para o WhatsApp. Continue por lá para alinhar detalhes e próximos passos do
+                diagnóstico.
+              </p>
+              <ul class="form-obrigado-lista">
+                <li>Confira se o WhatsApp abriu com o texto; envie para registrar o pedido.</li>
+                <li>Se não abrir, use o botão verde flutuante ou outro “Falar no WhatsApp” na página.</li>
+                <li>Complemente informações direto na conversa com a SPARTAN.</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>

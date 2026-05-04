@@ -384,6 +384,47 @@ section {
   width: 100%;
 }
 
+.form-obrigado {
+  display: none;
+  margin-top: 0;
+  padding: 1.25rem 1.35rem;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  text-align: left;
+}
+
+.form-obrigado.is-visible {
+  display: block;
+}
+
+.form-obrigado-titulo {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #0f172a;
+  margin: 0 0 0.65rem;
+  text-align: center;
+}
+
+.form-obrigado-texto {
+  margin: 0 0 1rem;
+  font-size: 0.94rem;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.form-obrigado-lista {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.88rem;
+  color: #334155;
+  line-height: 1.45;
+}
+
+.form-obrigado-lista li {
+  margin-bottom: 0.4rem;
+}
+
 .footer {
   background: #0f172a;
   color: #94a3b8;
